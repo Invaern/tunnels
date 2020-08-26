@@ -99,7 +99,7 @@ toCommand tunnel = concat [
     , options
     ]
   where
-    prefix = "ssh tomcat@" ++ (tunnelThrough tunnel)
+    prefix = "ssh " ++ (user tunnel) ++ "@" ++ (tunnelThrough tunnel)
     portForwardFlag = " -L "
     remoteAddress = (show $ localPort tunnel) ++ ":" ++ (remoteHost tunnel) ++ ":" ++ (show $ remotePort tunnel)
     doNotExecuteFlag = " -N "

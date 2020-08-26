@@ -10,6 +10,7 @@ import Control.Exception (Exception)
 
 data Tunnel = Tunnel {
     name :: String
+  , user :: String
   , tunnelThrough :: String
   , remoteHost :: String
   , localPort :: Word16
@@ -51,6 +52,7 @@ toTunnel tunnelConf = do
     status <- newTVarIO Inactive
     pure Tunnel {
         name = CFG.name tunnelConf
+      , user = CFG.user tunnelConf
       , tunnelThrough = CFG.tunnelThrough tunnelConf
       , remoteHost = CFG.remoteHost tunnelConf
       , localPort = CFG.localPort tunnelConf

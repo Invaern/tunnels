@@ -12,6 +12,7 @@ data Config = Config {
 
 data TunnelConf = TConf {
     name :: String 
+  , user :: String  
   , tunnelThrough :: String
   , localPort :: Word16
   , remotePort :: Word16

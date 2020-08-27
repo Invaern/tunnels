@@ -1,5 +1,5 @@
 {-# LANGUAGE ScopedTypeVariables #-}
-module Tunnel where
+module Tunnel (tunnelStatus, killTunnel, startTunnel, restartTunnel) where
 
 import Ui.Model
 import Control.Concurrent (ThreadId)
@@ -17,23 +17,24 @@ tunnelStatus tunnel = atomically $ readTVar (status tunnel)
 
 killTunnel ::  Tunnel -> IO ()
 killTunnel tunnel = do
-    threadId <- atomically $ do
-        tStatus <- readTVar (status tunnel)
-        case tStatus of
-            Active tId -> pure $  Just tId
-            _ -> pure Nothing
-    case threadId of
-        Just id -> throwTo id ThreadKilled
-        Nothing -> pure ()
+    tStatus <- atomically $ readTVar (status tunnel)
+    case tStatus of
+        Active threadId -> throwTo threadId ThreadKilled
+        _ -> pure ()
 
 restartTunnel :: BChan AppEvent -> Tunnel -> IO ()
 restartTunnel bChan tunnel = do
-    tStatus <- atomically $ readTVar (status tunnel)
+    tStatus <- atomically $ do
+        tStatus <- readTVar (status tunnel)
+        case tStatus of
+            Killed -> writeTVar (status tunnel) Restarting
+            Inactive -> writeTVar (status tunnel) Restarting
+            _ -> pure ()
+        readTVar (status tunnel)
+
     case tStatus of
         Active id -> throwTo id RestartRequested
-        Starting -> pure ()
-        Restarting -> pure ()
-        _ -> atomically $ writeTVar (status tunnel) Restarting
+        _ -> pure ()
     writeBChan bChan Refresh
 
 startTunnel :: BChan AppEvent -> Tunnel -> IO ()
@@ -103,6 +104,6 @@ toCommand tunnel = concat [
     portForwardFlag = " -L "
     remoteAddress = (show $ localPort tunnel) ++ ":" ++ (remoteHost tunnel) ++ ":" ++ (show $ remotePort tunnel)
     doNotExecuteFlag = " -N "
-    options = "-o ExitOnForwardFailure=True -o ConnectTimeout=3"
+    options = "-o ExitOnForwardFailure=True -o ConnectTimeout=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=2"
 
 

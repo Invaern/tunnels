@@ -6,10 +6,8 @@ import Data.Word (Word16)
 import qualified Graphics.Vty as Vty
 import qualified Graphics.Vty.Attributes as Vty
 import Control.Concurrent (ThreadId)
-import Control.Concurrent.STM.TVar
 import Brick
 import Brick.BChan
--- import Brick.Main
 import Brick.Widgets.List
 import qualified Brick.Types as T
 import qualified Data.Vector as V
@@ -128,5 +126,4 @@ mkApp state bChan = App {
   , appHandleEvent = eventHandler bChan
   , appStartEvent = pure
   , appAttrMap = const attrs
-
-}
+  }

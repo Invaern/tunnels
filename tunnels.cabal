@@ -23,7 +23,6 @@ executable tunnels
   build-depends:
       base >=4.12 && <4.13
     , tunnels
-    , process >= 1.6.5.0 && < 1.7
 
   hs-source-dirs: app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
@@ -31,7 +30,7 @@ executable tunnels
 
 library
   exposed-modules:
-    Lib, Config, CommandLine, Ui, Ui.Model, Ui.Widgets, Ui.Attrs, Tunnel
+    Config, CommandLine, Ui, Ui.Model, Ui.Widgets, Ui.Attrs, Tunnel
   hs-source-dirs:
     src
   build-depends:

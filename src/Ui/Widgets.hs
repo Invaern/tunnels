@@ -55,7 +55,7 @@ legend = border $ padRight Max $ hBox [
   , clearLogs <=> exit
   ]
   where
-    activate = padLeft (Pad 1) $ str "a: Activate selected" <=> str "A: Active all"
+    activate = padLeft (Pad 1) $ str "a: Activate selected" <=> str "A: Activate all"
     kill = padLeft (Pad 5) $  str "k: Kill selected" <=> str "K: Kill all"
     restart = padLeft (Pad 5) $ str "r: Restart selected" <=> str "R: Restart all"
     clearLogs = padLeft (Pad 5) $ str "C: Clear all logs"

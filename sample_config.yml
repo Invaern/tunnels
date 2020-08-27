@@ -1,5 +1,5 @@
 # For each tunnel in the config file process with following command will be spawned:
-# ssh <user>@<tunnelThrough> -L <localPort>:<remoteHost>:<remoteHost> -N -o ExitOnForwardFailure=True -o ConnectTimeout=3
+# ssh <user>@<tunnelThrough> -L <localPort>:<remoteHost>:<remoteHost> -N -o ExitOnForwardFailure=True -o ConnectTimeout=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=2
 # tunnels:
 #     - name: Tunnel name
 #       user: myUser

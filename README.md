@@ -12,7 +12,7 @@ This involved `*.sh` file with long list of commands
 and accompanying file responsible for killing the tunnels.
 Every now and then one of the tunnels would die, which required manual restart. Having to do it few times a day, five times a week got tedious pretty fast.
 
-See ![Sample config](sample_config.yml) for example configuration.
+See [Sample config](sample_config.yml) for example configuration.
 
 
 ## Benefits

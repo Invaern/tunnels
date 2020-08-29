@@ -5,7 +5,7 @@ SSH port tunneling with TUI
 
 
 ## Motivation
-Some of the projects I worked on required port tunneling to handle integrations with the external services.
+Some of the projects I worked on required port tunneling to handle integrations with external services.
 
 This involved `*.sh` file with long list of commands
 `ssh -f user@some.server -L 123:internal.network.server:456 -N -o ExitOnFailure=True`

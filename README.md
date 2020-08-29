@@ -23,3 +23,4 @@ See [Sample config](sample_config.yml) for example configuration.
 
 ## Limitations
 - authentication must be key based - there is no way of providing password
+- it is a toy project - it's scope and features "work for me", it's not meant to be a tool to address every scenario
